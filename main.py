@@ -1,22 +1,19 @@
-from telegram import Bot, Update
-from telegram.ext import Updater, CommandHandler, CallbackContext
 import os
+from telegram.ext import ApplicationBuilder, CommandHandler
+from telegram import Update
+from telegram.ext import ContextTypes
 
-TOKEN = os.environ.get("BOT_TOKEN")
-GROUP_ID = os.environ.get("GROUP_ID")
+TOKEN = os.getenv("TOKEN")
 
-def start(update: Update, context: CallbackContext):
-    context.bot.send_message(chat_id=GROUP_ID, text="🔓 Nhóm đã được mở khoá! Vào học ngay nha 📌", disable_notification=False)
-    context.bot.pin_chat_message(chat_id=GROUP_ID, message_id=update.message.message_id + 1)
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text("Bot đã hoạt động!")
 
 def main():
-    updater = Updater(TOKEN)
-    dp = updater.dispatcher
-    dp.add_handler(CommandHandler("unlock", start))
-    updater.start_polling()
-    updater.idle()
+    app = ApplicationBuilder().token(TOKEN).build()
+    app.add_handler(CommandHandler("start", start))
+    print("Bot started...")
+    app.run_polling()
 
 if __name__ == "__main__":
     main()
-# chỉnh sửa để ép redeploy
 
