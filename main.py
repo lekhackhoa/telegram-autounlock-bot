@@ -1,7 +1,7 @@
 from telegram import Update, ChatPermissions
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-TOKEN = "THAY_TOKEN_VAO_DAY"
+TOKEN = "7638210304:AAE0b-YvjORVZib8br_14rJwBLoT7CP9q1A"
 
 user_progress = {}
 
